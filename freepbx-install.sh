@@ -23,7 +23,7 @@ apt -y install nodejs
 }
 
 install_dahdi() {
-    pushd cd/usr/src
+    pushd cd /usr/src
     wget https://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
     tar xf dahdi-linux-complete-current.tar.gz
     cd dahdi-linux-complete*
@@ -187,19 +187,31 @@ configure_apache2 () {
 
 #main
 
-echo "installation script"
+echo "installation script------------"
 cd /usr/src
+echo "install dependintele-----------"
 install_dependinte
+echo "install nodejs-----------------"
 install_nodejs
+echo "install dahdi------------------"
 install_dahdi
+echo "install libpri-----------------"
 install_libpri
+echo "install pjsip------------------"
 install_pjsip
+echo "install jansson----------------"
 install_jansson
+echo "install asterisk---------------"
 install_asterisk
+echo "install asterisk addons--------"
 install_asterisk_addons
+echo "install asterisk sounds--------"
 install_asterisk_sounds
+echo "install freepbx----------------"
 install_freepbx
+echo "Enable Httpd"
 chkconfig httpd on
+echo "Enable mysql "
 chkconfig mysqld on
 service httpd restart
 configure_apache2
