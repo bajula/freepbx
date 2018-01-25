@@ -1,7 +1,6 @@
 #!/bin/bash
 #install freepbx from source
 set -e
-
 sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 service sshd restart
 sleep 10 
@@ -64,7 +63,7 @@ install_jansson() {
   make check
   make install
 }
-pear install Console_Getopt
+
 
 install_asterisk() {
     pushd /usr/src
