@@ -172,13 +172,15 @@ echo '
 '> /etc/odbc.ini
 
 systemctl enable freepbx
+configure_apache2 () {
+ sed -i 's/upload_max_filesize = .*/upload_max_filesize = 20M/g' /etc/php/5.6/apache2/php.ini
+ sed -i 's/\(APACHE_RUN_USER=\)\(.*\)/\1asterisk/g' /etc/apache2/envvars
+ sed -i 's/\(APACHE_RUN_GROUP=\)\(.*\)/\1asterisk/g' /etc/apache2/envvars
+ chown asterisk. /run/lock/apache2
+ mv /var/www/html/index.html /var/www/html/index.html.disable
+ a2enmod rewrite
+}
 
-sed -i 's/upload_max_filesize = .*/upload_max_filesize = 20M/g' /etc/php/5.6/apache2/php.ini
-sed -i 's/\(APACHE_RUN_USER=\)\(.*\)/\1asterisk/g' /etc/apache2/envvars
-sed -i 's/\(APACHE_RUN_GROUP=\)\(.*\)/\1asterisk/g' /etc/apache2/envvars
-chown asterisk. /run/lock/apache2
-mv /var/www/html/index.html /var/www/html/index.html.disable
-a2enmod rewrite
 #main
 systemctl restart apache2
 echo "installation script"
