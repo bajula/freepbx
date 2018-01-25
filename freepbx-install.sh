@@ -23,27 +23,28 @@ apt -y install nodejs
 }
 
 install_dahdi() {
-    cd /usr/src
+    pushd cd/usr/src
     wget https://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
     tar xf dahdi-linux-complete-current.tar.gz
     cd dahdi-linux-complete*
     make
     make install
     make config
+    popd
 }
 
 install_libpri() {
-    cd  /usr/src
+    pushd /usr/src
      wget https://downloads.asterisk.org/pub/telephony/libpri/libpri-current.tar.gz
       tar xf libpri*
     cd /usr/src/libpri*
     make
     make install
-   
+   popd
 }
 
 install_pjsip () {
-  cd /usr/src 
+  pushd /usr/src 
   wget http://www.pjsip.org/release/2.7.1/pjproject-2.7.1.tar.bz2 
   tar -xjvf pjproject-2.7.1.tar.bz2
   rm -f pjproject-2.4.tar.bz2
@@ -52,10 +53,11 @@ install_pjsip () {
   make dep
   make
   make install
+  popd
 }
 
 install_jansson() {
- cd /usr/src
+ pushd /usr/src
  wget http://www.digip.org/jansson/releases/jansson-2.10.tar.gz
  tar zxvf jansson-2.10.tar.gz
  cd jansson-2.10
@@ -64,6 +66,7 @@ install_jansson() {
   make
   make check
   make install
+  popd
 }
 
 install_asterisk() {
