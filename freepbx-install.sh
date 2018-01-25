@@ -179,10 +179,11 @@ configure_apache2 () {
  chown asterisk. /run/lock/apache2
  mv /var/www/html/index.html /var/www/html/index.html.disable
  a2enmod rewrite
+ systemctl restart apache2
 }
 
 #main
-systemctl restart apache2
+
 echo "installation script"
 cd /usr/src
 install_dependinte
