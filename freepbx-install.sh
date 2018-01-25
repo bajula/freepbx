@@ -30,7 +30,8 @@ install_dahdi() {
     make
     make install
     make config
- }
+}
+
 install_libpri() {
     cd  /usr/src
      wget https://downloads.asterisk.org/pub/telephony/libpri/libpri-current.tar.gz
@@ -40,6 +41,7 @@ install_libpri() {
     make install
    
 }
+
 install_pjsip () {
   cd /usr/src 
   wget http://www.pjsip.org/release/2.7.1/pjproject-2.7.1.tar.bz2 
@@ -64,7 +66,6 @@ install_jansson() {
   make install
 }
 
-
 install_asterisk() {
     pushd /usr/src
     groupadd asterisk 
@@ -85,7 +86,8 @@ install_asterisk() {
     ldconfig 
     update-rc.d -f asterisk remove
     popd
- }
+}
+
 install_asterisk_addons() {
     pushd /usr/src
     wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-addons-current.tar.gz
@@ -98,6 +100,7 @@ install_asterisk_addons() {
     make install
     popd
 }
+
 install_asterisk_sounds() {
     cd /var/lib/asterisk/sounds
     wget http://downloads.asterisk.org/pub/telephony/sounds/asterisk-core-sounds-en-wav-current.tar.gz
@@ -114,8 +117,9 @@ install_asterisk_sounds() {
     tar xfz asterisk-core-sounds-en-g722-current.tar.gz
     rm -f asterisk-core-sounds-en-g722-current.tar.gz
 }
+
 install_freepbx(){
-    pushd /usr/src
+    cd /usr/src
     git clone -b release/14.0 --single-branch https://github.com/freepbx/framework.git freepbx
     useradd -m asterisk
     chown asterisk. /var/run/asterisk
@@ -123,17 +127,18 @@ install_freepbx(){
     chown -R asterisk. /var/{lib,log,spool}/asterisk
     chown -R asterisk. /usr/lib/asterisk
     rm -rf /var/www/html
-
     wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-13.0-latest.tgz
     tar vxfz freepbx-13.0-latest.tgz
     rm -f freepbx-13.0-latest.tgz
     cd freepbx
     ./start_asterisk start
     ./install -n
-   fwconsole ma upgrade framework core voicemail sipsettings infoservices \
-     featurecodeadmin logfiles callrecording cdr dashboard music conferences
+    fwconsole ma upgrade framework core voicemail sipsettings infoservices \
+    featurecodeadmin logfiles callrecording cdr dashboard music conferences
+       
+}
 
-    cat >> /etc/systemd/system/freepbx.service << EOF
+echo '
     [Unit]
     Description=Freepbx
     After=mariadb.service
@@ -146,37 +151,28 @@ install_freepbx(){
  
     [Install]
     WantedBy=multi-user.target
+    ' > /etc/systemd/system/freepbx.service 
 
-EOF
+echo '
+    [MySQL]
+    Description = ODBC for MySQL
+    Driver = /usr/lib/x86_64-linux-gnu/odbc/libmyodbc.so
+    Setup = /usr/lib/x86_64-linux-gnu/odbc/libodbcmyS.so
+    FileUsage = 1
+    ' > /etc/odbcinst.ini
+echo '
+    [MySQL-asteriskcdrdb]
+    Description=MySQL connection to 'asteriskcdrdb' database
+    driver=MySQL
+    server=localhost
+    database=asteriskcdrdb
+    Port=3306
+    Socket=/var/run/mysqld/mysqld.sock
+    option=3
+'> /etc/odbc.ini
 
-cat >> /etc/odbcinst.ini << EOF
-[MySQL]
-Description = ODBC for MySQL
-Driver = /usr/lib/x86_64-linux-gnu/odbc/libmyodbc.so
-Setup = /usr/lib/x86_64-linux-gnu/odbc/libodbcmyS.so
-FileUsage = 1
- 
-EOF
-cat >> /etc/odbc.ini << EOF
-[MySQL-asteriskcdrdb]
-Description=MySQL connection to 'asteriskcdrdb' database
-driver=MySQL
-server=localhost
-database=asteriskcdrdb
-Port=3306
-Socket=/var/run/mysqld/mysqld.sock
-option=3
-  
-EOF
+systemctl enable freepbx
 
-    systemctl enable freepbx
-    popd
-}
-cat >> /etc/apache2/conf-available/allowoverride.conf << EOF 
-<Directory /var/www/html>
-    AllowOverride All
-    </Directory>
-EOF
 sed -i 's/upload_max_filesize = .*/upload_max_filesize = 20M/g' /etc/php/5.6/apache2/php.ini
 sed -i 's/\(APACHE_RUN_USER=\)\(.*\)/\1asterisk/g' /etc/apache2/envvars
 sed -i 's/\(APACHE_RUN_GROUP=\)\(.*\)/\1asterisk/g' /etc/apache2/envvars
@@ -200,4 +196,5 @@ install_freepbx
 chkconfig httpd on
 chkconfig mysqld on
 service httpd restart
+configure_apache2
 amportal start
