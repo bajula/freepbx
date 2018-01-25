@@ -36,7 +36,7 @@ install_dahdi() {
 install_libpri() {
     pushd /usr/src
      wget https://downloads.asterisk.org/pub/telephony/libpri/libpri-current.tar.gz
-      tar xf libpri*
+      tar xf libpri-current.tar.gz
     cd /usr/src/libpri-1*
     make
     make install
