@@ -11,7 +11,7 @@ curl https://packages.sury.org/php/apt.gpg | apt-key add -
 echo 'deb https://packages.sury.org/php/ stretch main' > /etc/apt/sources.list.d/deb.sury.org.list
 
 install_dependinte () {
-      apt install -y build-essential linux-headers-`uname -r` php5.6 php5.6-curl php5.6-cli php5.6-mysql php5.6-mbstring php5.6-gd php5.6-xml subversion htop unzip zip vim curl wget got tmux build-essential aptitude openssh-server apache2 mariadb-server mariadb-client bison doxygen flex php-pear curl sox libncurses5-dev libssl-dev libmariadbclient-dev mpg123 libxml2-dev libnewt-dev sqlite3 libsqlite3-dev pkg-config automake libtool-bin autoconf git subversion uuid uuid-dev libiksemel-dev libjansson-dev tftpd postfix mailutils nano ntp libspandsp-dev libcurl4-openssl-dev libical-dev libneon27-dev libasound2-dev libogg-dev libvorbis-dev libicu-dev libsrtp0-dev unixodbc unixodbc-dev python-dev xinetd e2fsprogs dbus sudo xmlstarlet mongodb lame ffmpeg dirmngr 
+      apt install -y build-essential linux-headers-`uname -r` php5.6 php5.6-curl php5.6-cli php5.6-mysql php5.6-mbstring php5.6-gd php5.6-xml subversion htop unzip zip vim curl wget tmux build-essential aptitude openssh-server apache2 mariadb-server mariadb-client bison doxygen flex php-pear curl sox libncurses5-dev libssl-dev libmariadbclient-dev mpg123 libxml2-dev libnewt-dev sqlite3 libsqlite3-dev pkg-config automake libtool-bin autoconf git subversion uuid uuid-dev libiksemel-dev libjansson-dev tftpd postfix mailutils nano ntp libspandsp-dev libcurl4-openssl-dev libical-dev libneon27-dev libasound2-dev libogg-dev libvorbis-dev libicu-dev libsrtp0-dev unixodbc unixodbc-dev python-dev xinetd e2fsprogs dbus sudo xmlstarlet mongodb lame ffmpeg dirmngr 
 
 
 
