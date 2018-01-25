@@ -26,7 +26,7 @@ install_dahdi() {
     pushd /usr/src
     wget https://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
     tar xf dahdi-linux-complete-current.tar.gz
-    cd dahdi-linux-complete*
+    cd dahdi-linux-complete-2*
     make
     make install
     make config
