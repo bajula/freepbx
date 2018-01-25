@@ -18,12 +18,9 @@ install_dependinte () {
 
 }
 
-pear install Console_Getopt
 install_nodejs () {
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 apt -y install nodejs
-
-
 }
 
 install_dahdi() {
@@ -67,6 +64,7 @@ install_jansson() {
   make check
   make install
 }
+pear install Console_Getopt
 
 install_asterisk() {
     pushd /usr/src
