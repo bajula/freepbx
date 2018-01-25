@@ -37,7 +37,7 @@ install_libpri() {
     pushd /usr/src
      wget https://downloads.asterisk.org/pub/telephony/libpri/libpri-current.tar.gz
       tar xf libpri*
-    cd /usr/src/libpri*
+    cd /usr/src/libpri-1*
     make
     make install
    popd
