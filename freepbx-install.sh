@@ -47,8 +47,7 @@ install_pjsip () {
   pushd /usr/src 
   wget http://www.pjsip.org/release/2.7.1/pjproject-2.7.1.tar.bz2 
   tar -xjvf pjproject-2.7.1.tar.bz2
-  rm -f pjproject-2.4.tar.bz2
-  cd pjproject-2.4
+  cd pjproject-2.7.1
   CFLAGS='-DPJ_HAS_IPV6=1' ./configure --enable-shared --disable-sound --disable-resample --disable-video --disable-opencore-amr
   make dep
   make
