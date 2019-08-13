@@ -7,10 +7,12 @@ FreePBX is a web-based open source GUI (graphical user interface) that controls 
 This script will covers the installation of Asterisk v13 or v14 and Freepbx v14 GUI from source on Debian v8.8. 
 
 ## Install instructions: 
-* #sudo apt update && sudo apt upgrade -y && sudo apt install git 
-* #cd /usr/local/src 
-* #git clone https://github.com/bajula/freepbx.git
-* #cd freepbx
-* #chmod +x freepbx-install.sh
-* #sudo ./freepbx-install.sh
+```bash 
+#sudo apt update && sudo apt upgrade -y && sudo apt install git
+#cd /usr/local/src 
+#git clone https://github.com/bajula/freepbx.git
+#cd freepbx
+#chmod +x freepbx-install.sh
+#sudo ./freepbx-install.sh
 
+```
